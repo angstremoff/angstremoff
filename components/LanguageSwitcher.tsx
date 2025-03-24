@@ -50,6 +50,29 @@ export default function LanguageSwitcher() {
 
   const currentLanguage = languages.find(item => item.code === lang) || languages[0];
 
+  // Для мобильной версии - отображаем флаги в строку вместо выпадающего меню
+  if (isMobile) {
+    return (
+      <div className="flex justify-center space-x-2 py-2">
+        {languages.map((item) => (
+          <button
+            key={item.code}
+            onClick={() => switchLanguage(item.code as 'ru' | 'en' | 'sr')}
+            className={`flex items-center justify-center w-10 h-10 rounded-full overflow-hidden border-2 transition-all 
+              ${item.code === lang ? 'border-accent' : 'border-white/20 hover:border-white/40'}`}
+          >
+            <img 
+              src={item.flag} 
+              alt={item.name} 
+              className="w-full h-full object-cover"
+            />
+          </button>
+        ))}
+      </div>
+    );
+  }
+
+  // Десктопная версия с выпадающим меню
   return (
     <div className="relative" ref={dropdownRef}>
       <button
@@ -71,15 +94,7 @@ export default function LanguageSwitcher() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
             transition={{ duration: 0.2 }}
-            className={`
-              ${isMobile ? 'absolute left-0 right-0 mx-auto' : 'absolute right-0'} 
-              mt-2 w-12 rounded-xl overflow-hidden glass-effect border border-white/10 z-50
-            `}
-            style={{
-              marginLeft: isMobile ? 'auto' : '',
-              marginRight: isMobile ? 'auto' : '',
-              width: '48px',
-            }}
+            className="absolute right-0 mt-2 w-12 rounded-xl overflow-hidden glass-effect border border-white/10 z-50"
           >
             <div className="py-1">
               {languages.map((item) => (
