@@ -128,13 +128,11 @@ export default function HeroSection() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="rounded-2xl bg-white/10 backdrop-blur-sm p-10 shadow-lg"
+              className="rounded-2xl bg-white/10 backdrop-blur-sm p-12 shadow-lg"
             >
-              <div className="text-gradient flex justify-center items-center">
-                <span className="text-9xl font-display font-bold tracking-tight leading-none">A</span>
-                <span className="text-9xl font-display font-bold tracking-tight leading-none">f</span>
-                <span className="text-9xl font-display font-bold tracking-tight leading-none">f</span>
-              </div>
+              <h2 className="font-display font-bold text-gradient text-center">
+                <span className="text-8xl">Aff</span>
+              </h2>
             </motion.div>
           </div>
         </div>
