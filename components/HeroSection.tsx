@@ -10,16 +10,21 @@ export default function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Простая анимация без сложных плагинов
+    // Запускаем анимацию сразу после загрузки
     if (heroRef.current) {
       const bg = heroRef.current.querySelector('.hero-bg');
       if (bg) {
+        // Сначала устанавливаем положение, чтобы пурпурного не было видно
+        gsap.set(bg, { x: '0%' });
+        
+        // Теперь запускаем анимацию
         gsap.to(bg, {
           x: '100%',
           duration: 15,
           ease: 'power1.inOut',
           repeat: -1,
-          yoyo: true
+          yoyo: true,
+          delay: 0.1 // Минимальная задержка для уверенности, что стили применились
         });
       }
     }
@@ -43,8 +48,8 @@ export default function HeroSection() {
     <section id="home" ref={heroRef} className="min-h-screen relative flex items-center py-20 bg-primary">
       {/* Фоновые элементы */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Горизонтальная анимация пурпурного градиента */}
-        <div className="hero-bg absolute inset-0 bg-gradient-to-r from-purple-900 via-purple-800 to-purple-900 opacity-20 -left-full"></div>
+        {/* Горизонтальная анимация пурпурного градиента - начинается не за экраном, а прямо на экране */}
+        <div className="hero-bg absolute inset-0 bg-gradient-to-r from-purple-900 via-purple-800 to-purple-900 opacity-20"></div>
         
         {/* Декоративные элементы */}
         <div className="absolute inset-0 opacity-20">
@@ -111,7 +116,7 @@ export default function HeroSection() {
           </div>
           
           <div className="hidden lg:flex justify-center items-center">
-            {/* AFF с градиентом как у основного заголовка */}
+            {/* Aff с градиентом как у основного заголовка */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -119,7 +124,7 @@ export default function HeroSection() {
               className="rounded-2xl bg-white/10 backdrop-blur-sm p-10 shadow-lg"
             >
               <h2 className="text-9xl font-display font-bold text-gradient">
-                AFF
+                Aff
               </h2>
             </motion.div>
           </div>
