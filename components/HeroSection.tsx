@@ -123,9 +123,11 @@ export default function HeroSection() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="rounded-2xl bg-white/10 backdrop-blur-sm p-10 shadow-lg"
             >
-              <h2 className="text-9xl font-display font-bold text-gradient">
-                Aff
-              </h2>
+              <div className="text-gradient flex justify-center items-center">
+                <span className="text-9xl font-display font-bold tracking-tight leading-none">A</span>
+                <span className="text-9xl font-display font-bold tracking-tight leading-none">f</span>
+                <span className="text-9xl font-display font-bold tracking-tight leading-none">f</span>
+              </div>
             </motion.div>
           </div>
         </div>
