@@ -43,7 +43,8 @@ export default function HeroSection() {
     <section id="home" ref={heroRef} className="min-h-screen relative flex items-center py-20">
       {/* Фоновые элементы */}
       <div className="hero-bg absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary to-primary/80"></div>
+        {/* Основной градиентный фон с анимацией */}
+        <div className="animated-bg"></div>
         
         {/* Декоративные элементы */}
         <div className="absolute inset-0 opacity-20">
@@ -110,14 +111,14 @@ export default function HeroSection() {
           </div>
           
           <div className="hidden lg:flex justify-center items-center">
-            {/* Буквы "Аа" с градиентной анимацией */}
+            {/* Буквы "Аа" без градиентной анимации, на прозрачном фоне */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="rounded-2xl bg-purple-900/20 backdrop-blur-sm p-10 shadow-lg"
+              className="rounded-2xl bg-white/10 backdrop-blur-sm p-10 shadow-lg"
             >
-              <h2 className="text-9xl font-display font-bold logo-gradient">
+              <h2 className="text-9xl font-display font-bold text-white/80">
                 Aa
               </h2>
             </motion.div>
