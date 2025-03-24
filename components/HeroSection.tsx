@@ -111,15 +111,15 @@ export default function HeroSection() {
           </div>
           
           <div className="hidden lg:flex justify-center items-center">
-            {/* Буквы "Аа" без градиентной анимации, на прозрачном фоне */}
+            {/* AFF с градиентом как у основного заголовка */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="rounded-2xl bg-white/10 backdrop-blur-sm p-10 shadow-lg"
             >
-              <h2 className="text-9xl font-display font-bold text-white/80">
-                Aa
+              <h2 className="text-9xl font-display font-bold text-gradient">
+                AFF
               </h2>
             </motion.div>
           </div>
