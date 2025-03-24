@@ -30,24 +30,22 @@ export default function HeroSection() {
     }
   }, []);
 
-  // Обработчик для плавной прокрутки
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  // Обработчик для плавной прокрутки - более надежный вариант
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     
-    // Находим элемент по ID
-    const element = document.getElementById(id);
+    // Прямая прокрутка к целевому элементу
+    const targetElement = document.getElementById(targetId);
     
-    if (element) {
-      // Добавляем небольшую задержку для корректной работы
-      setTimeout(() => {
-        const headerOffset = 80; // высота навбара или другие отступы
-        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-        
-        window.scrollTo({
-          top: elementPosition - headerOffset,
-          behavior: 'smooth'
-        });
-      }, 100);
+    if (targetElement) {
+      const headerOffset = 80; // Высота навбара или другие отступы
+      const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+      
+      // Прокручиваем с учетом отступа
+      window.scrollTo({
+        top: elementPosition - headerOffset,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -105,20 +103,38 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="flex flex-wrap gap-4"
             >
-              <a 
-                href="#portfolio" 
-                onClick={(e) => handleSmoothScroll(e, 'portfolio')}
+              <button 
+                onClick={() => {
+                  const portfolioSection = document.getElementById('portfolio');
+                  if (portfolioSection) {
+                    const headerOffset = 80;
+                    const elementPosition = portfolioSection.getBoundingClientRect().top + window.scrollY;
+                    window.scrollTo({
+                      top: elementPosition - headerOffset,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
                 className="px-8 py-3 bg-accent hover:bg-accent/90 text-white rounded-full font-medium transition-all hover-scale text-center"
               >
                 {t.hero.portfolio}
-              </a>
-              <a 
-                href="#contact" 
-                onClick={(e) => handleSmoothScroll(e, 'contact')}
+              </button>
+              <button 
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    const headerOffset = 80;
+                    const elementPosition = contactSection.getBoundingClientRect().top + window.scrollY;
+                    window.scrollTo({
+                      top: elementPosition - headerOffset,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
                 className="px-8 py-3 bg-transparent border border-white/20 hover:border-white/40 text-white rounded-full font-medium transition-all hover-scale text-center"
               >
                 {t.hero.contact}
-              </a>
+              </button>
             </motion.div>
           </div>
           
