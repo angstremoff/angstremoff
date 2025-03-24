@@ -14,6 +14,21 @@ export default function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { lang, setLang } = useLanguage();
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Определяем, является ли устройство мобильным
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint в Tailwind
+    };
+    
+    // Проверяем при загрузке
+    checkIfMobile();
+    
+    // Проверяем при изменении размера окна
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -56,7 +71,15 @@ export default function LanguageSwitcher() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-12 rounded-xl overflow-hidden glass-effect border border-white/10 z-50"
+            className={`
+              ${isMobile ? 'absolute left-0 right-0 mx-auto' : 'absolute right-0'} 
+              mt-2 w-12 rounded-xl overflow-hidden glass-effect border border-white/10 z-50
+            `}
+            style={{
+              marginLeft: isMobile ? 'auto' : '',
+              marginRight: isMobile ? 'auto' : '',
+              width: '48px',
+            }}
           >
             <div className="py-1">
               {languages.map((item) => (
