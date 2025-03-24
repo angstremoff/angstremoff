@@ -30,14 +30,19 @@ export default function HeroSection() {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const offset = 80; // высота навбара + небольшой отступ
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth'
+      });
     }
   };
 
   return (
-    <section ref={heroRef} id="home" className="relative min-h-screen flex items-center justify-center pt-20 pb-20 overflow-hidden snap-section">
+    <section id="home" ref={heroRef} className="min-h-screen relative flex items-center py-20">
       {/* Фоновые элементы */}
-      <div className="hero-bg absolute inset-0 w-full h-full">
+      <div className="hero-bg absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary to-primary/80"></div>
         
         {/* Декоративные элементы */}
@@ -104,43 +109,21 @@ export default function HeroSection() {
             </motion.div>
           </div>
           
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="hidden lg:block relative rounded-3xl overflow-hidden aspect-square"
-          >
-            {/* Здесь может быть ваша 3D модель или анимация */}
-            <div className="relative h-full w-full bg-gradient-to-br from-accent/30 via-purple-500/20 to-blue-500/30 p-1 rounded-3xl overflow-hidden">
-              <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
-              <div className="absolute inset-0 bg-noise-pattern opacity-10"></div>
-            </div>
-          </motion.div>
+          <div className="hidden lg:flex justify-center items-center">
+            {/* Буквы "Аа" с градиентной анимацией */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="rounded-2xl bg-purple-900/20 backdrop-blur-sm p-10 shadow-lg"
+            >
+              <h2 className="text-9xl font-display font-bold logo-gradient">
+                Aa
+              </h2>
+            </motion.div>
+          </div>
         </div>
       </div>
-
-      {/* Скролл индикатор */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <a 
-          href="#about" 
-          onClick={(e) => handleSmoothScroll(e, 'about')}
-          className="block"
-        >
-          <motion.div
-            initial={{ y: 0 }}
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="w-6 h-9 rounded-full border-2 border-white/20 flex justify-center items-start p-1"
-          >
-            <div className="w-1 h-2 bg-white/60 rounded-full"></div>
-          </motion.div>
-        </a>
-      </motion.div>
     </section>
   );
 }
