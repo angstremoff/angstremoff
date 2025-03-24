@@ -30,25 +30,6 @@ export default function HeroSection() {
     }
   }, []);
 
-  // Обработчик для плавной прокрутки - более надежный вариант
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    e.preventDefault();
-    
-    // Прямая прокрутка к целевому элементу
-    const targetElement = document.getElementById(targetId);
-    
-    if (targetElement) {
-      const headerOffset = 80; // Высота навбара или другие отступы
-      const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-      
-      // Прокручиваем с учетом отступа
-      window.scrollTo({
-        top: elementPosition - headerOffset,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
     <section id="home" ref={heroRef} className="min-h-screen relative flex items-center py-20 bg-primary">
       {/* Фоновые элементы */}
@@ -103,38 +84,18 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="flex flex-wrap gap-4"
             >
-              <button 
-                onClick={() => {
-                  const portfolioSection = document.getElementById('portfolio');
-                  if (portfolioSection) {
-                    const headerOffset = 80;
-                    const elementPosition = portfolioSection.getBoundingClientRect().top + window.scrollY;
-                    window.scrollTo({
-                      top: elementPosition - headerOffset,
-                      behavior: 'smooth'
-                    });
-                  }
-                }}
-                className="px-8 py-3 bg-accent hover:bg-accent/90 text-white rounded-full font-medium transition-all hover-scale text-center"
+              <a 
+                href="#portfolio" 
+                className="px-8 py-3 bg-accent hover:bg-accent/90 text-white rounded-full font-medium transition-all hover-scale text-center cursor-pointer"
               >
                 {t.hero.portfolio}
-              </button>
-              <button 
-                onClick={() => {
-                  const contactSection = document.getElementById('contact');
-                  if (contactSection) {
-                    const headerOffset = 80;
-                    const elementPosition = contactSection.getBoundingClientRect().top + window.scrollY;
-                    window.scrollTo({
-                      top: elementPosition - headerOffset,
-                      behavior: 'smooth'
-                    });
-                  }
-                }}
-                className="px-8 py-3 bg-transparent border border-white/20 hover:border-white/40 text-white rounded-full font-medium transition-all hover-scale text-center"
+              </a>
+              <a 
+                href="#contact" 
+                className="px-8 py-3 bg-transparent border border-white/20 hover:border-white/40 text-white rounded-full font-medium transition-all hover-scale text-center cursor-pointer"
               >
                 {t.hero.contact}
-              </button>
+              </a>
             </motion.div>
           </div>
           
