@@ -3,9 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['localhost'],
-    unoptimized: process.env.NODE_ENV === 'production',
+    unoptimized: true, // Необходимо для статической генерации
   },
-  output: 'standalone',
+  output: 'export', // Вместо 'standalone'
+  trailingSlash: true, // Важно для правильных ссылок в статическом режиме
 };
 
 module.exports = nextConfig;
