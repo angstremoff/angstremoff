@@ -10,13 +10,13 @@ export default function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Простая анимация фона без сложных плагинов
+    // Простая анимация без сложных плагинов
     if (heroRef.current) {
       const bg = heroRef.current.querySelector('.hero-bg');
       if (bg) {
         gsap.to(bg, {
-          y: '10%',
-          duration: 10,
+          x: '100%',
+          duration: 15,
           ease: 'power1.inOut',
           repeat: -1,
           yoyo: true
@@ -40,11 +40,11 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" ref={heroRef} className="min-h-screen relative flex items-center py-20">
+    <section id="home" ref={heroRef} className="min-h-screen relative flex items-center py-20 bg-primary">
       {/* Фоновые элементы */}
-      <div className="hero-bg absolute inset-0 overflow-hidden">
-        {/* Основной градиентный фон с анимацией */}
-        <div className="animated-bg"></div>
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Горизонтальная анимация пурпурного градиента */}
+        <div className="hero-bg absolute inset-0 bg-gradient-to-r from-purple-900 via-purple-800 to-purple-900 opacity-20 -left-full"></div>
         
         {/* Декоративные элементы */}
         <div className="absolute inset-0 opacity-20">
