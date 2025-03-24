@@ -1,0 +1,66 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "hero": {
+    "studio": "Creative Web Studio",
+    "title": "Creating {digital} worlds with unique design",
+    "digital": "digital",
+    "description": "We transform your ideas into captivating visual stories. We don't just create websites — we design experiences and emotions.",
+    "portfolio": "Our Work",
+    "contact": "Contact Us"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Who We Are",
+    "description": "We are a team of professionals with extensive experience in digital product development. Our mission is to create unique projects that solve business challenges and impress users.",
+    "mission": "Our Mission",
+    "mission_text": "To create innovative web products that help our clients achieve their goals.",
+    "vision": "Our Vision",
+    "vision_text": "To be a leading digital design studio that sets quality standards in the industry.",
+    "values": "Our Values",
+    "values_text": "Creativity, professionalism, attention to detail, and individual approach to each project."
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "What We Offer",
+    "webdesign": "Web Design",
+    "webdesign_desc": "We create unique and modern designs that make your brand stand out among competitors.",
+    "webdev": "Web Development",
+    "webdev_desc": "We develop responsive, fast, and functional websites using modern technologies.",
+    "mobile": "Mobile Applications",
+    "mobile_desc": "We create native and cross-platform mobile applications with intuitive interfaces.",
+    "seo": "SEO Optimization",
+    "seo_desc": "We increase your website's visibility in search engines and boost organic traffic.",
+    "cta": "Discuss Project"
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Our Projects",
+    "all": "All",
+    "webdesign": "Web Design",
+    "webdev": "Web Development",
+    "mobile": "Mobile Apps",
+    "view": "View",
+    "technologies": "Technologies",
+    "close": "Close"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Let's Start a Project Together",
+    "name": "Your Name",
+    "email": "Your Email",
+    "message": "Message",
+    "send": "Send",
+    "address": "Address",
+    "phone": "Phone",
+    "email_contact": "Email"
+  },
+  "footer": {
+    "rights": "© 2025 AngstremOFF. All rights reserved."
+  }
+}
