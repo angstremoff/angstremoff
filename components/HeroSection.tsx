@@ -33,14 +33,21 @@ export default function HeroSection() {
   // Обработчик для плавной прокрутки
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
+    
+    // Находим элемент по ID
     const element = document.getElementById(id);
+    
     if (element) {
-      const offset = 80; // высота навбара + небольшой отступ
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: elementPosition - offset,
-        behavior: 'smooth'
-      });
+      // Добавляем небольшую задержку для корректной работы
+      setTimeout(() => {
+        const headerOffset = 80; // высота навбара или другие отступы
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        
+        window.scrollTo({
+          top: elementPosition - headerOffset,
+          behavior: 'smooth'
+        });
+      }, 100);
     }
   };
 

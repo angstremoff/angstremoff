@@ -155,11 +155,11 @@ export default function PortfolioSection() {
   const closeProject = () => {
     setActiveProject(null);
     setCurrentImage(null);
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = '';
   };
   
   return (
-    <section id="portfolio" className="py-20 md:py-28 w-full bg-primary">
+    <section id="portfolio" className="py-20 bg-primary relative snap-section">
       {/* Заголовок секции */}
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center mb-16">
