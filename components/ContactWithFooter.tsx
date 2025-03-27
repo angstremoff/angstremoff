@@ -35,6 +35,8 @@ export default function ContactWithFooter() {
     setIsSubmitting(true);
     setHasError(false);
     
+    console.log('Подготовка к отправке формы...', formData);
+    
     // Отправка формы напрямую на angstremoff@ya.ru
     const templateParams = {
       to_email: 'angstremoff@ya.ru',
@@ -44,14 +46,17 @@ export default function ContactWithFooter() {
       message: formData.message,
     };
 
+    console.log('Параметры шаблона:', templateParams);
+    console.log('Начало отправки через EmailJS...');
+
     emailjs.send(
       'service_s7g51nr', // Service ID
       'template_ky4p7zm', // Template ID
       templateParams,
       'VFI4YrELMcvCkVUHo' // Public Key
     )
-    .then(() => {
-      console.log('Сообщение успешно отправлено!');
+    .then((response) => {
+      console.log('Сообщение успешно отправлено!', response);
       setIsSubmitting(false);
       setIsSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
@@ -61,6 +66,7 @@ export default function ContactWithFooter() {
     })
     .catch((error) => {
       console.error('Ошибка при отправке:', error);
+      console.error('Детали ошибки:', JSON.stringify(error, null, 2));
       setIsSubmitting(false);
       setHasError(true);
     });
