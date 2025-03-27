@@ -7,7 +7,43 @@ import { useLanguage } from '@/context/LanguageContext';
 
 export default function ContactWithFooter() {
   const { t } = useLanguage();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const currentYear = new Date().getFullYear();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Получаем данные формы
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    
+    try {
+      // Отправляем данные на FormSubmit без перезагрузки страницы
+      const response = await fetch('https://formsubmit.co/angstremoff@ya.ru', {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (response.ok) {
+        // Показываем сообщение об успешной отправке
+        setIsSubmitted(true);
+        form.reset();
+        
+        // Через 5 секунд скрываем сообщение
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+      } else {
+        console.error('Ошибка при отправке формы');
+      }
+    } catch (error) {
+      console.error('Ошибка:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div id="contact" className="relative bg-gradient-to-b from-primary to-primary/95 overflow-hidden snap-section">
@@ -19,7 +55,7 @@ export default function ContactWithFooter() {
       <section className="py-20 relative">
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center mb-16">
-            <motion.div
+            <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -110,68 +146,80 @@ export default function ContactWithFooter() {
               
               {/* Контактная форма */}
               <div className="lg:col-span-3">
-                <form 
-                  action="https://formsubmit.co/angstremoff@ya.ru" 
-                  method="POST" 
-                  className="bg-white/5 rounded-2xl p-8 backdrop-blur-sm flex flex-col gap-5"
-                >
-                  <div>
-                    <label htmlFor="name" className="block text-sm text-gray-400 mb-1">{t.contact.name}</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
-                      required
-                    />
+                {isSubmitted ? (
+                  <div className="bg-white/5 rounded-2xl p-8 h-full backdrop-blur-sm flex flex-col items-center justify-center text-center">
+                    <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mb-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-2">{t.contact.messageSent}</h3>
+                    <p className="text-gray-300">{t.contact.weWillContactYou}</p>
                   </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-sm text-gray-400 mb-1">{t.contact.email}</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
-                      required
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="phone" className="block text-sm text-gray-400 mb-1">{t.contact.phone}</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="message" className="block text-sm text-gray-400 mb-1">{t.contact.message}</label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white resize-none"
-                      required
-                    />
-                  </div>
-                  
-                  {/* Скрытые поля для FormSubmit */}
-                  <input type="hidden" name="_subject" value="Сообщение с сайта Angstremoff Studio" />
-                  <input type="hidden" name="_captcha" value="false" />
-                  <input type="hidden" name="_next" value="https://angstremoff.com" />
-                  
-                  <div className="mt-2">
-                    <button
-                      type="submit"
-                      className="w-full py-3 px-6 bg-accent hover:bg-accent/80 text-white font-medium rounded-lg transition-colors flex items-center justify-center"
-                    >
-                      {t.contact.send}
-                    </button>
-                  </div>
-                </form>
+                ) : (
+                  <form 
+                    onSubmit={handleSubmit}
+                    className="bg-white/5 rounded-2xl p-8 backdrop-blur-sm flex flex-col gap-5"
+                  >
+                    <div>
+                      <label htmlFor="name" className="block text-sm text-gray-400 mb-1">{t.contact.name}</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
+                        required
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="email" className="block text-sm text-gray-400 mb-1">{t.contact.email}</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
+                        required
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="phone" className="block text-sm text-gray-400 mb-1">{t.contact.phone}</label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="message" className="block text-sm text-gray-400 mb-1">{t.contact.message}</label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        rows={4}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white resize-none"
+                        required
+                      />
+                    </div>
+                    
+                    {/* Скрытые поля для FormSubmit */}
+                    <input type="hidden" name="_subject" value="Сообщение с сайта Angstremoff Studio" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_next" value="https://angstremoff.com" />
+                    
+                    <div className="mt-2">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full py-3 px-6 bg-accent hover:bg-accent/80 text-white font-medium rounded-lg transition-colors flex items-center justify-center"
+                      >
+                        {isSubmitting ? t.contact.sending : t.contact.send}
+                      </button>
+                    </div>
+                  </form>
+                )}
               </div>
             </motion.div>
           </div>
