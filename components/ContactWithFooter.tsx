@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
@@ -18,6 +18,11 @@ export default function ContactWithFooter() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [hasError, setHasError] = useState(false);
   const currentYear = new Date().getFullYear();
+  
+  // Инициализация EmailJS при загрузке компонента
+  useEffect(() => {
+    emailjs.init('VFI4YrELMcvCkVUHo');
+  }, []);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
