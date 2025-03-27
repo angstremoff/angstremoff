@@ -125,7 +125,6 @@ export default {
     emailAddress: 'Имејл адреса',
     address: 'Адреса',
     addressContent: 'Лозница, Иве Лоле Рибара 66',
-    phoneContent: '+381 641 834 48',
     emailAddressContent: 'info@angstremoff.ru'
   },
   footer: {
@@ -133,7 +132,6 @@ export default {
     navigation: 'Навигација',
     contact: 'Контакт',
     email: 'info@angstremoff.ru',
-    phone: '+381 641 834 48',
     socialLinks: 'Друштвене мреже',
     designedWith: 'Дизајнирано са',
     by: 'од',
