@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "AngstremoFF - Веб-студия с уникальным дизайном",
   description: "Создаем современные и креативные веб-сайты, мобильные приложения для Android и iOS, и дизайн-решения. Ваш проводник в мир цифрового дизайна.",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
-  keywords: "веб-разработка, мобильные приложения, Android, iOS, веб-дизайн, разработка сайтов, Angstremoff Studio, веб-студия, Сербия",
+  keywords: "веб-разработка, мобильные приложения, Android, iOS, веб-дизайн, разработка сайтов, Angstremoff Studio, веб-студия, Сербия, web development, mobile apps, website design, web studio, Serbia, veb razvoj, mobilne aplikacije, dizajn sajta, veb studio, Srbija",
   authors: [{ name: "Angstremoff Studio" }],
   openGraph: {
     type: "website",
