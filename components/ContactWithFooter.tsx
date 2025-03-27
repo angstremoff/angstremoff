@@ -7,7 +7,6 @@ import { useLanguage } from '@/context/LanguageContext';
 
 export default function ContactWithFooter() {
   const { t } = useLanguage();
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const currentYear = new Date().getFullYear();
 
   return (
@@ -111,79 +110,68 @@ export default function ContactWithFooter() {
               
               {/* Контактная форма */}
               <div className="lg:col-span-3">
-                {isSubmitted ? (
-                  <div className="bg-white/5 rounded-2xl p-8 h-full backdrop-blur-sm flex flex-col items-center justify-center text-center">
-                    <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-500" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{t.contact.messageSent}</h3>
-                    <p className="text-gray-300">{t.contact.weWillContactYou}</p>
+                <form 
+                  action="https://formsubmit.co/angstremoff@ya.ru" 
+                  method="POST" 
+                  className="bg-white/5 rounded-2xl p-8 backdrop-blur-sm flex flex-col gap-5"
+                >
+                  <div>
+                    <label htmlFor="name" className="block text-sm text-gray-400 mb-1">{t.contact.name}</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
+                      required
+                    />
                   </div>
-                ) : (
-                  <form 
-                    action="https://formspree.io/f/xayrgjow" 
-                    method="POST" 
-                    className="bg-white/5 rounded-2xl p-8 backdrop-blur-sm flex flex-col gap-5"
-                    onSubmit={() => setTimeout(() => setIsSubmitted(true), 1000)}
-                  >
-                    <div>
-                      <label htmlFor="name" className="block text-sm text-gray-400 mb-1">{t.contact.name}</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
-                        required
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-sm text-gray-400 mb-1">{t.contact.email}</label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
-                        required
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="phone" className="block text-sm text-gray-400 mb-1">{t.contact.phone}</label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="message" className="block text-sm text-gray-400 mb-1">{t.contact.message}</label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows={4}
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white resize-none"
-                        required
-                      />
-                    </div>
-                    
-                    {/* Скрытое поле для указания куда отправлять письма */}
-                    <input type="hidden" name="_replyto" value="angstremoff@ya.ru" />
-                    
-                    <div className="mt-2">
-                      <button
-                        type="submit"
-                        className="w-full py-3 px-6 bg-accent hover:bg-accent/80 text-white font-medium rounded-lg transition-colors flex items-center justify-center"
-                      >
-                        {t.contact.send}
-                      </button>
-                    </div>
-                  </form>
-                )}
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm text-gray-400 mb-1">{t.contact.email}</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="phone" className="block text-sm text-gray-400 mb-1">{t.contact.phone}</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="message" className="block text-sm text-gray-400 mb-1">{t.contact.message}</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white resize-none"
+                      required
+                    />
+                  </div>
+                  
+                  {/* Скрытые поля для FormSubmit */}
+                  <input type="hidden" name="_subject" value="Сообщение с сайта Angstremoff Studio" />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_next" value="https://angstremoff.ru" />
+                  
+                  <div className="mt-2">
+                    <button
+                      type="submit"
+                      className="w-full py-3 px-6 bg-accent hover:bg-accent/80 text-white font-medium rounded-lg transition-colors flex items-center justify-center"
+                    >
+                      {t.contact.send}
+                    </button>
+                  </div>
+                </form>
               </div>
             </motion.div>
           </div>
