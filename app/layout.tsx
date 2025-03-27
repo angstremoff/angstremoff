@@ -48,6 +48,16 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
+        {/* Скрипт для перенаправления с onrender.com на основной домен */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (window.location.hostname.includes('onrender.com')) {
+                window.location.href = 'https://angstremoff.com' + window.location.pathname;
+              }
+            `
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
