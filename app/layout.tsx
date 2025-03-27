@@ -25,7 +25,8 @@ export const metadata: Metadata = {
       "ru": "/ru",
       "en": "/",
       "sr": "/sr"
-    }
+    },
+    canonical: "https://angstremoff.com"
   },
   robots: {
     index: true,

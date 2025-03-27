@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Блокировка индексации render.com поддомена
+Host: angstremoff.com
+
 Sitemap: https://angstremoff.com/sitemap.xml
