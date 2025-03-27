@@ -30,18 +30,19 @@ export default function ContactWithFooter() {
     setIsSubmitting(true);
     setHasError(false);
     
-    // Отправка формы через EmailJS
+    // Отправка формы напрямую на angstremoff@ya.ru
     const templateParams = {
+      to_email: 'angstremoff@ya.ru',
       from_name: formData.name,
       from_email: formData.email,
       message: formData.message,
     };
 
     emailjs.send(
-      'service_s7g51nr', // Замените на ваш Service ID
-      'template_ky4p7zm', // Замените на ваш Template ID
+      'service_s7g51nr', // Service ID
+      'template_ky4p7zm', // Template ID
       templateParams,
-      'VFI4YrELMcvCkVUHo' // Замените на ваш Public Key
+      'VFI4YrELMcvCkVUHo' // Public Key
     )
     .then(() => {
       console.log('Сообщение успешно отправлено!');
