@@ -100,7 +100,7 @@ export default function HeroSection() {
           </div>
           
           <div className="hidden lg:flex justify-center items-center">
-            {/* Aff с градиентом как у основного заголовка */}
+            {/* "{ ... }" с градиентом как у основного заголовка */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -108,7 +108,7 @@ export default function HeroSection() {
               className="rounded-2xl bg-white/10 backdrop-blur-sm p-12 shadow-lg"
             >
               <h2 className="font-display font-bold text-gradient text-center">
-                <span className="text-8xl">Aff</span>
+                <span className="text-8xl">{"{ ... }"}</span>
               </h2>
             </motion.div>
           </div>

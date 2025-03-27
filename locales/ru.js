@@ -112,7 +112,7 @@ export default {
     phone: 'Телефон',
     message: 'Сообщение',
     send: 'Отправить',
-    addressContent: 'Лозница, Иве Лоле Рибара 66',
+    addressContent: 'Лозница, Сербия',
     phoneContent: '+381 641 834 48',
     emailAddressContent: 'Angstremoff@ya.ru',
     address: 'Адрес',
