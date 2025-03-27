@@ -1,77 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
-import emailjs from '@emailjs/browser';
 
 export default function ContactWithFooter() {
   const { t } = useLanguage();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
-  
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [hasError, setHasError] = useState(false);
   const currentYear = new Date().getFullYear();
-  
-  // Сюда нужно будет вставить ваш PUBLIC_KEY из EmailJS
-  useEffect(() => {
-    emailjs.init("PUBLIC_KEY"); // Вставьте свой PUBLIC_KEY из EmailJS
-  }, []);
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setHasError(false);
-    
-    console.log('Подготовка к отправке формы...', formData);
-    
-    // Отправка формы напрямую на angstremoff@ya.ru
-    const templateParams = {
-      to_email: 'angstremoff@ya.ru',
-      from_name: formData.name,
-      from_email: formData.email,
-      from_phone: formData.phone,
-      message: formData.message,
-    };
-
-    console.log('Параметры шаблона:', templateParams);
-    console.log('Начало отправки через EmailJS...');
-
-    // Сюда нужно подставить SERVICE_ID и TEMPLATE_ID из вашего аккаунта EmailJS
-    emailjs.send(
-      "SERVICE_ID", // Вставьте свой SERVICE_ID из EmailJS
-      "TEMPLATE_ID", // Вставьте свой TEMPLATE_ID из EmailJS
-      templateParams,
-      "PUBLIC_KEY" // Вставьте свой PUBLIC_KEY из EmailJS
-    )
-    .then((response) => {
-      console.log('Сообщение успешно отправлено!', response);
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', phone: '', message: '' });
-      
-      // Сброс статуса отправки через 3 секунды
-      setTimeout(() => setIsSubmitted(false), 3000);
-    })
-    .catch((error) => {
-      console.error('Ошибка при отправке:', error);
-      console.error('Детали ошибки:', JSON.stringify(error, null, 2));
-      setIsSubmitting(false);
-      setHasError(true);
-    });
-  };
 
   return (
     <div id="contact" className="relative bg-gradient-to-b from-primary to-primary/95 overflow-hidden snap-section">
@@ -176,41 +113,41 @@ export default function ContactWithFooter() {
               <div className="lg:col-span-3">
                 {isSubmitted ? (
                   <div className="bg-white/5 rounded-2xl p-8 h-full backdrop-blur-sm flex flex-col items-center justify-center text-center">
-                    <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-accent" viewBox="0 0 20 20" fill="currentColor">
+                    <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mb-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-500" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold mb-2">{t.contact.messageSent}</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2">{t.contact.messageSent}</h3>
                     <p className="text-gray-300">{t.contact.weWillContactYou}</p>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="bg-white/5 rounded-2xl p-8 backdrop-blur-sm flex flex-col gap-5">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                      <div>
-                        <label htmlFor="name" className="block text-sm text-gray-400 mb-1">{t.contact.name}</label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm text-gray-400 mb-1">{t.contact.email}</label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
-                          required
-                        />
-                      </div>
+                  <form 
+                    action="https://formspree.io/f/xayrgjow" 
+                    method="POST" 
+                    className="bg-white/5 rounded-2xl p-8 backdrop-blur-sm flex flex-col gap-5"
+                    onSubmit={() => setTimeout(() => setIsSubmitted(true), 1000)}
+                  >
+                    <div>
+                      <label htmlFor="name" className="block text-sm text-gray-400 mb-1">{t.contact.name}</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
+                        required
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="email" className="block text-sm text-gray-400 mb-1">{t.contact.email}</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
+                        required
+                      />
                     </div>
                     
                     <div>
@@ -219,8 +156,6 @@ export default function ContactWithFooter() {
                         type="tel"
                         id="phone"
                         name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
                       />
                     </div>
@@ -230,27 +165,23 @@ export default function ContactWithFooter() {
                       <textarea
                         id="message"
                         name="message"
-                        value={formData.message}
-                        onChange={handleChange}
                         rows={4}
                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white resize-none"
                         required
                       />
                     </div>
                     
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className={`px-6 py-3 bg-accent text-white rounded-lg font-medium w-full md:w-auto md:self-start transition-all ${
-                        isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover-scale'
-                      }`}
-                    >
-                      {isSubmitting ? t.contact.sending : t.contact.sendMessage}
-                    </button>
+                    {/* Скрытое поле для указания куда отправлять письма */}
+                    <input type="hidden" name="_replyto" value="angstremoff@ya.ru" />
                     
-                    {hasError && (
-                      <p className="text-red-500 text-sm mt-2">{t.contact.error}</p>
-                    )}
+                    <div className="mt-2">
+                      <button
+                        type="submit"
+                        className="w-full py-3 px-6 bg-accent hover:bg-accent/80 text-white font-medium rounded-lg transition-colors flex items-center justify-center"
+                      >
+                        {t.contact.send}
+                      </button>
+                    </div>
                   </form>
                 )}
               </div>
