@@ -161,7 +161,7 @@ export default function ContactWithFooter() {
                   {/* Скрытые поля для FormSubmit */}
                   <input type="hidden" name="_subject" value="Сообщение с сайта Angstremoff Studio" />
                   <input type="hidden" name="_captcha" value="false" />
-                  <input type="hidden" name="_next" value="https://angstremoff.ru" />
+                  <input type="hidden" name="_next" value="https://angstremoff.com" />
                   
                   <div className="mt-2">
                     <button
