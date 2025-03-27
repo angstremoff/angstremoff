@@ -20,9 +20,9 @@ export default function ContactWithFooter() {
   const [hasError, setHasError] = useState(false);
   const currentYear = new Date().getFullYear();
   
-  // Инициализация EmailJS при загрузке компонента
+  // Сюда нужно будет вставить ваш PUBLIC_KEY из EmailJS
   useEffect(() => {
-    emailjs.init('VFI4YrELMcvCkVUHo');
+    emailjs.init("PUBLIC_KEY"); // Вставьте свой PUBLIC_KEY из EmailJS
   }, []);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -49,11 +49,12 @@ export default function ContactWithFooter() {
     console.log('Параметры шаблона:', templateParams);
     console.log('Начало отправки через EmailJS...');
 
+    // Сюда нужно подставить SERVICE_ID и TEMPLATE_ID из вашего аккаунта EmailJS
     emailjs.send(
-      'service_s7g51nr', // Service ID
-      'template_ky4p7zm', // Template ID
+      "SERVICE_ID", // Вставьте свой SERVICE_ID из EmailJS
+      "TEMPLATE_ID", // Вставьте свой TEMPLATE_ID из EmailJS
       templateParams,
-      'VFI4YrELMcvCkVUHo' // Public Key
+      "PUBLIC_KEY" // Вставьте свой PUBLIC_KEY из EmailJS
     )
     .then((response) => {
       console.log('Сообщение успешно отправлено!', response);
@@ -71,7 +72,7 @@ export default function ContactWithFooter() {
       setHasError(true);
     });
   };
-  
+
   return (
     <div id="contact" className="relative bg-gradient-to-b from-primary to-primary/95 overflow-hidden snap-section">
       {/* Фоновые элементы для контактной формы */}
