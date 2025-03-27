@@ -11,7 +11,6 @@ export default function ContactWithFooter() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
     message: '',
   });
   
@@ -48,7 +47,7 @@ export default function ContactWithFooter() {
       console.log('Сообщение успешно отправлено!');
       setIsSubmitting(false);
       setIsSubmitted(true);
-      setFormData({ name: '', email: '', phone: '', message: '' });
+      setFormData({ name: '', email: '', message: '' });
       
       // Сброс статуса отправки через 3 секунды
       setTimeout(() => setIsSubmitted(false), 3000);
@@ -201,18 +200,6 @@ export default function ContactWithFooter() {
                     </div>
                     
                     <div>
-                      <label htmlFor="phone" className="block text-sm text-gray-400 mb-1">{t.contact.phone}</label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
-                      />
-                    </div>
-                    
-                    <div>
                       <label htmlFor="message" className="block text-sm text-gray-400 mb-1">{t.contact.message}</label>
                       <textarea
                         id="message"
@@ -304,16 +291,20 @@ export default function ContactWithFooter() {
               <h3 className="text-lg font-medium mb-4">{t.footer.contact}</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
-                  <span className="mr-3 mt-1 text-accent"><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                  </svg></span>
+                  <span className="mr-3 mt-1 text-accent">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                  </span>
                   <span className="text-gray-400">{t.footer.location}</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-3 mt-1 text-accent"><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                  </svg></span>
+                  <span className="mr-3 mt-1 text-accent">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                  </span>
                   <span className="text-gray-400">{t.footer.email}</span>
                 </li>
                 <li className="flex items-start">
