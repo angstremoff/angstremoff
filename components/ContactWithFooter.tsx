@@ -11,6 +11,7 @@ export default function ContactWithFooter() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     message: '',
   });
   
@@ -39,6 +40,7 @@ export default function ContactWithFooter() {
       to_email: 'angstremoff@ya.ru',
       from_name: formData.name,
       from_email: formData.email,
+      from_phone: formData.phone,
       message: formData.message,
     };
 
@@ -52,7 +54,7 @@ export default function ContactWithFooter() {
       console.log('Сообщение успешно отправлено!');
       setIsSubmitting(false);
       setIsSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', message: '' });
       
       // Сброс статуса отправки через 3 секунды
       setTimeout(() => setIsSubmitted(false), 3000);
@@ -202,6 +204,18 @@ export default function ContactWithFooter() {
                           required
                         />
                       </div>
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="phone" className="block text-sm text-gray-400 mb-1">{t.contact.phone}</label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/50 text-white"
+                      />
                     </div>
                     
                     <div>
