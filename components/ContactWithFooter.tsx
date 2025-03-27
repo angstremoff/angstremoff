@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import emailjs from '@emailjs/browser';
 
 export default function ContactWithFooter() {
   const { t } = useLanguage();
@@ -16,6 +17,7 @@ export default function ContactWithFooter() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const currentYear = new Date().getFullYear();
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -26,17 +28,35 @@ export default function ContactWithFooter() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setHasError(false);
     
-    // Имитация отправки формы
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
+    // Отправка формы через EmailJS
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message,
+    };
+
+    emailjs.send(
+      'service_s7g51nr', // Замените на ваш Service ID
+      'template_ky4p7zm', // Замените на ваш Template ID
+      templateParams,
+      'VFI4YrELMcvCkVUHo' // Замените на ваш Public Key
+    )
+    .then(() => {
+      console.log('Сообщение успешно отправлено!');
       setIsSubmitting(false);
       setIsSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
       
       // Сброс статуса отправки через 3 секунды
       setTimeout(() => setIsSubmitted(false), 3000);
-    }, 1500);
+    })
+    .catch((error) => {
+      console.error('Ошибка при отправке:', error);
+      setIsSubmitting(false);
+      setHasError(true);
+    });
   };
   
   return (
@@ -103,18 +123,6 @@ export default function ContactWithFooter() {
                       <div>
                         <h4 className="text-sm text-gray-400 mb-1">{t.contact.address}</h4>
                         <p className="text-white">{t.contact.addressContent}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start">
-                      <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 mr-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent" viewBox="0 0 20 20" fill="currentColor">
-                          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="text-sm text-gray-400 mb-1">{t.contact.phone}</h4>
-                        <p className="text-white">-</p>
                       </div>
                     </div>
                     
@@ -225,6 +233,10 @@ export default function ContactWithFooter() {
                     >
                       {isSubmitting ? t.contact.sending : t.contact.sendMessage}
                     </button>
+                    
+                    {hasError && (
+                      <p className="text-red-500 text-sm mt-2">{t.contact.error}</p>
+                    )}
                   </form>
                 )}
               </div>

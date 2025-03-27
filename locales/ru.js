@@ -124,7 +124,8 @@ export default {
     weWillContactYou: 'Мы свяжемся с вами в ближайшее время.',
     infoTitle: 'Контактная информация',
     telegram: 'Telegram',
-    telegramContent: '@Angstremoff'
+    telegramContent: '@Angstremoff',
+    error: 'Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз.'
   },
   footer: {
     rights: 'Все права защищены',

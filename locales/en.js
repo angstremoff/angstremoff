@@ -120,11 +120,12 @@ export default {
     contactInfo: 'Contact Information',
     sendMessage: 'Send message',
     sending: 'Sending...',
-    messageSent: 'Message sent!',
-    weWillContactYou: 'We will contact you shortly.',
+    messageSent: 'Message Sent!',
+    weWillContactYou: 'We will get back to you soon.',
     infoTitle: 'Contact Information',
     telegram: 'Telegram',
-    telegramContent: '@Angstremoff'
+    telegramContent: '@Angstremoff',
+    error: 'An error occurred while sending. Please try again.'
   },
   footer: {
     rights: 'All rights reserved',
